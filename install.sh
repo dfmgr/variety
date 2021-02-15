@@ -143,6 +143,7 @@ fi
 # run post install scripts
 run_postinst() {
   dfmgr_run_post
+  rm_rf /var/tmp/variety-copied-wallpaper-*
 }
 #
 execute "run_postinst" "Running post install scripts"
