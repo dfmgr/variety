@@ -145,7 +145,6 @@ run_postinst() {
   running variety || variety -q &>/dev/null
   dfmgr_run_post
   rm_rf /var/tmp/variety-copied-wallpaper-*
-  __start variety
 }
 #
 execute "run_postinst" "Running post install scripts"
