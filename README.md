@@ -5,7 +5,7 @@ Variety is a wallpaper manager for Linux systems
 Automatic install/update:
 
 ```shell
-bash -c "$(curl -LSs https://github.com/dfmgr/variety/raw/master/install.sh)"
+bash -c "$(curl -LSs https://github.com/dfmgr/variety/raw/main/install.sh)"
 ```
 
 Manual install:
