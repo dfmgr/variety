@@ -148,6 +148,7 @@ run_postinst() {
   ps aux|grep variety|grep -v 'grep'|grep -q '^' && variety -q &>/dev/null
   dfmgr_run_post
   rm_rf /var/tmp/variety-copied-wallpaper-*
+  { sleep 30 && variety } & disown
 }
 #
 execute "run_postinst" "Running post install scripts"
