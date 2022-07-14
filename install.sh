@@ -145,7 +145,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # run post install scripts
 run_postinst() {
-  running variety || variety -q &>/dev/null
+  ps aux|grep variety|grep -v 'grep'|grep -q '^' && variety -q &>/dev/null
   dfmgr_run_post
   rm_rf /var/tmp/variety-copied-wallpaper-*
 }
