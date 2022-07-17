@@ -145,13 +145,12 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # run post install scripts
 run_postinst() {
-  ps aux | grep variety | grep -v 'grep' | grep -q '^' && variety -q &>/dev/null
+  is_running="$(ps aux | grep "variety" | grep -v ' grep' | grep -q '^' && variety -q &>/dev/null && sleep 10 echo 'true'||echo 'false')"
   dfmgr_run_post
   rm_rf /var/tmp/variety-copied-wallpaper-*
   [[ "$DESKTOP_SESSION" = "xfce4" ]] && {
-    sleep 30 && variety &
-    disown
-  }
+  [[ "is_running" = "false" ]] && { sleep 30 && variety & disown; } ||true
+  }||true
 }
 #
 execute "run_postinst" "Running post install scripts"
