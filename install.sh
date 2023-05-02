@@ -176,7 +176,7 @@ PYTHON_PIP=""
 PHP_COMPOSER=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Run custom actions
-
+__app_is_running variety && VARIETY_IS_RUNNING="true"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Show a custom message after install
 __run_post_message() {
@@ -186,9 +186,7 @@ __run_post_message() {
 # Define pre-install scripts
 __run_pre_install() {
   local getRunStatus=0
-  is_running="$(__app_is_running variety && echo 'true' || echo '')"
-  was_running="$is_running"
-  [ -n "$is_running" ] && __kill variety && is_running="false" && was_running="true" || true
+  __kill variety
   return $getRunStatus
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -202,7 +200,7 @@ __run_prepost_install() {
 # run after primary post install function
 __run_post_install() {
   local getRunStatus=0
-  if [ "$was_running" = "true" ] || { [ "$is_running" = "false" ] && [ "$DESKTOP_SESSION" = "xfce4" ]; }; then
+  if [ "$VARIETY_IS_RUNNING" = "true" ] || [ "$DESKTOP_SESSION" = "xfce4" ]; then
     __silent_start variety
   fi
   return $getRunStatus
